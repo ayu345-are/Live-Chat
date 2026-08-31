@@ -1,17 +1,17 @@
 // 1. Impor module yang diperlukan dari firebase dan firestore
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    query,
-    orderBy,
-    onSnapshot,
-    serverTimestamp,
-    doc,
-    updateDoc,
-    deleteDoc,
-    increment
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  updateDoc,
+  deleteDoc,
+  increment
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"
 
 // 2. konfigurasi Firebase
@@ -36,24 +36,27 @@ const messageInput = document.getElementById("message")
 const chatBox = document.getElementById("chat-box")
 
 //fitur kirim pesan
-chatForm.addEventListener("submit", async (event) =>{
+chatForm.addEventListener("submit", async (event) => {
   event.preventDefault()
+  
   
   const username = usernameInput.value.trim()
   const message = messageInput.value.trim()
   if (username && message) {
-  //kirim ke firestore
-  try {
-    await addDoc(messagesCollection, {
-      username: username,
-      message: message,
-      waktu: serverTimestamp()
-    })
-    //bersihkan input setelah mengirim pesan
-    messageInput.value =""
-    
-  } catch (error) {
-    console.log("Gagal mengirim pesan:", error)
+    //kirim ke firestore
+    try {
+      await addDoc(messagesCollection, {
+        username: username,
+        message: message,
+        waktu: serverTimestamp()
+      })
+      //bersihkan input setelah mengirim pesan
+      messageInput.value = ""
+      
+    } catch (error) {
+      console.log("Gagal mengirim pesan:", error)
+    }
   }
-}
 })
+
+// fitur pesan Listener (Realtime)
