@@ -82,6 +82,8 @@ chatBox.innerHTML = ""
     renderPesan(data.username, data.message, waktu )
     
   })
+  // scroll chatBox ke bawah setip kali ada pesan baru
+  chatBox.scrollTop = chatBox.scrollHeight
 })
 
 function renderPesan(username, message, waktu) {
