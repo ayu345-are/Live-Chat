@@ -60,3 +60,45 @@ chatForm.addEventListener("submit", async (event) => {
 })
 
 // fitur pesan Listener (Realtime)
+const q = query(messagesCollection, orderBy("waktu", "asc"))
+
+onSnapshot(queryPesan, (snapshot) => {
+
+  // bersihkan chatBox sebelum menampilkan pesan baru
+chatBox.innerHTML = ""
+  
+  // tampilkan pesan baru di chatBo
+  snapShot.forEach((doc) => {
+// ambil data dari dokumen
+    const data = doc.data()
+
+    //membuat tampilan waktu
+    const waktu = data.waktu.toDate().toLocaleTimeString(
+      [],
+      { hour: '2-digit', minute: '2-digit' }
+      )
+
+    // render pesan(memanggik fungsi renderpesan)
+    renderPesan(data.username, data.message, waktu )
+    
+  })
+})
+
+function renderPesan(username, message, waktu) {
+  // buat elemen untuk menampilkan pesan 
+  const messageDiv = document.createElement("div")
+  messageDiv.classList.add("message-card")
+
+  //menambahkan konten pesan ke messageDiv
+  messageDiv.innerHTML = `
+  <div class="message-content">
+  <strong>${username}</strong>
+  <span>${message}</span>
+  
+  </div>
+  <span class="time">${waktu}</span>
+  ` // backtik
+
+  //menambahkan messageDiv ke ChatBox
+  chatBox.appendChild(messageDiv)
+}
