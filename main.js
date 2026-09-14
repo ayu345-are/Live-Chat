@@ -60,7 +60,7 @@ chatForm.addEventListener("submit", async (event) => {
 })
 
 // fitur pesan Listener (Realtime)
-const q = query(messageCollection, orderBy("waktu", "asc"))
+const queryPesan = query(messageCollection, orderBy("waktu", "asc"))
 
 onSnapshot(queryPesan, (snapshot) => {
 
