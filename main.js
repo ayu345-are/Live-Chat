@@ -68,7 +68,7 @@ onSnapshot(queryPesan, (snapshot) => {
 chatBox.innerHTML = ""
   
   // tampilkan pesan baru di chatBo
-  snapShot.forEach((doc) => {
+  snapshot.forEach((doc) => {
 // ambil data dari dokumen
     const data = doc.data()
 
